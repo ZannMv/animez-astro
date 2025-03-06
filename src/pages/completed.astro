@@ -1,20 +1,15 @@
 ---
 export const prerender = false;
 import Layout from "~/layouts/Layout.astro";
-import Carousel from "~/components/ui/Carousel.astro";
 import Card from "~/components/ui/Card.astro";
 import { fetchData } from "~/utils/api";
 
-const homeRes = await fetchData("home");
-const data = await fetchData("ongoing");
+const data = await fetchData("completed");
 ---
 
-<Layout title="Ongoing - KuramAnimEZ">
-  <Carousel data={homeRes?.hero || []} />
-
+<Layout title="Completed - KuramAnimEZ">
   <div id="content" class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
     <Card data={data?.results || []} />
-
     <div
       id="loading"
       class="skeleton aspect-[3/4] max-h-96 flex items-center justify-center"
@@ -76,7 +71,7 @@ const data = await fetchData("ongoing");
       if (window.__infiniteScrollObserver) {
         window.__infiniteScrollObserver.disconnect();
       }
-      initInfiniteScroll("ongoing");
+      initInfiniteScroll("completed");
     }
 
     if (document.readyState === "loading") {
